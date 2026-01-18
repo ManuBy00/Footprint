@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+            stylesheets="@styles.css" styleClass="content-scroll-pane"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.footprinttracker.Controller.ProfileController">
+
+    <content>
+        <VBox alignment="TOP_CENTER" spacing="30.0" styleClass="content-area">
+
+            <padding>
+                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+
+            <VBox maxWidth="600.0" spacing="5.0">
+                <Label styleClass="welcome-title" text="Mi Perfil" textFill="#2e7d32">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label styleClass="welcome-subtitle" text="Gestiona tu información personal y seguridad." />
+            </VBox>
+
+            <VBox maxWidth="600.0" spacing="15.0" styleClass="dashboard-card">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+
+                <Label styleClass="section-title" text="Información Básica">
+                    <font><Font name="System Bold" size="18.0" /></font>
+                </Label>
+                <Separator />
+
+                <VBox spacing="10.0">
+                    <Label text="Nombre de Usuario" textFill="#555555" />
+                    <TextField fx:id="txtNombre" promptText="Tu nombre" />
+                </VBox>
+
+                <VBox spacing="10.0">
+                    <Label text="Correo Electrónico (No editable)" textFill="#555555" />
+                    <TextField fx:id="txtEmail" disable="true" editable="false" />
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT">
+                    <Button onAction="#actualizarPerfil" styleClass="primary-button" text="Guardar Cambios" />
+                </HBox>
+            </VBox>
+
+            <VBox maxWidth="600.0" spacing="15.0" styleClass="dashboard-card">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+
+                <Label styleClass="section-title" text="Seguridad">
+                    <font><Font name="System Bold" size="18.0" /></font>
+                </Label>
+                <Separator />
+
+                <VBox spacing="10.0">
+                    <Label text="Contraseña Actual" textFill="#555555" />
+                    <PasswordField fx:id="txtPassActual" promptText="********" />
+                </VBox>
+
+                <HBox spacing="20.0">
+                    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                        <Label text="Nueva Contraseña" textFill="#555555" />
+                        <PasswordField fx:id="txtPassNueva" promptText="********" />
+                    </VBox>
+                    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                        <Label text="Confirmar Nueva" textFill="#555555" />
+                        <PasswordField fx:id="txtPassConfirm" promptText="********" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_RIGHT">
+                    <Button onAction="#cambiarPassword" styleClass="primary-button" text="Actualizar Contraseña" />
+                </HBox>
+            </VBox>
+
+            <VBox maxWidth="600.0" spacing="15.0" styleClass="dashboard-card, danger-zone">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+
+                <Label text="Zona de Peligro" textFill="#d32f2f">
+                    <font><Font name="System Bold" size="18.0" /></font>
+                </Label>
+                <Separator />
+
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <Label text="Una vez eliminada, tu cuenta no podrá recuperarse. Por favor, tenlo en cuenta."
+                           textFill="#555555" wrapText="true" HBox.hgrow="ALWAYS" />
+                    <Button onAction="#eliminarCuenta" styleClass="danger-button" text="Eliminar Cuenta" />
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </content>
+</ScrollPane>

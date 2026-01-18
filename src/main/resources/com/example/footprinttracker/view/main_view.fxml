@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1080.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.footprinttracker.Controller.DashboardController">
+
+    <left>
+        <VBox prefWidth="250.0" spacing="20.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+            </padding>
+            <VBox spacing="5.0">
+                <Label styleClass="sidebar-title" text="Footprint">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label styleClass="sidebar-subtitle" text="TRACKER" />
+            </VBox>
+            <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button, menu-button-active" text="Inicio">
+                    <graphic>
+                        <Text fill="WHITE" styleClass="menu-icon" text="□" />
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button" text="Registrar Huella">
+                    <graphic>
+                        <Text fill="WHITE" styleClass="menu-icon" text="+" />
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button" text="Historial">
+                    <graphic>
+                        <Text fill="WHITE" styleClass="menu-icon" text="⏱" />
+                    </graphic>
+                </Button>
+                <Button fx:id="profileButton" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" onAction="#abrirPerfil" styleClass="menu-button" text="Mi Perfil">
+                    <graphic>
+                        <Text fill="WHITE" styleClass="menu-icon" text="👤" />
+                    </graphic>
+                </Button>
+            </VBox>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" onAction="#handleLogout" styleClass="menu-button-logout" text="Cerrar Sesión">
+                <graphic>
+                    <Text fill="#ffcdd2" styleClass="menu-icon" text="←" />
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll-pane">
+            <content>
+                <VBox spacing="30.0" styleClass="content-area">
+                    <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                    </padding>
+
+                    <VBox spacing="5.0">
+                        <Label fx:id="bienvenidoLabel" styleClass="welcome-title" text="Hola, Usuario">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </Label>
+                        <Label styleClass="welcome-subtitle" text="Aquí está el resumen de tu impacto ambiental." textFill="#757575" />
+                    </VBox>
+
+                    <HBox spacing="20.0">
+                        <VBox styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="card-title" text="Huella Total" />
+                                    <HBox alignment="BASELINE_LEFT" spacing="5.0">
+                                        <Label styleClass="card-value" text="120">
+                                            <font>
+                                                <Font name="System Bold" size="36.0" />
+                                            </font>
+                                        </Label>
+                                        <Label styleClass="card-unit" text="kg CO₂" />
+                                    </HBox>
+                                </VBox>
+                                <StackPane>
+                                    <Circle fill="#fff3e0" radius="20.0" />
+                                    <Text fill="#ff9800" text="🌿">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Text>
+                                </StackPane>
+                            </HBox>
+                            <Label styleClass="card-subtitle, trend-down" text="📉 -12% vs mes anterior" />
+                        </VBox>
+
+                        <VBox styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="card-title" text="Registros este mes" />
+                                    <Label styleClass="card-value" text="5">
+                                        <font>
+                                            <Font name="System Bold" size="36.0" />
+                                        </font>
+                                    </Label>
+                                </VBox>
+                                <StackPane>
+                                    <Circle fill="#e3f2fd" radius="20.0" />
+                                    <Text fill="#2196f3" text="📅">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Text>
+                                </StackPane>
+                            </HBox>
+                            <Label styleClass="card-subtitle" text="Último registro: hace 2 días" />
+                        </VBox>
+
+                        <VBox styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="card-title" text="Tu Categoría" />
+                                    <Label styleClass="card-value, category-eco" text="Eco-Friendly">
+                                        <font>
+                                            <Font name="System Bold" size="28.0" />
+                                        </font>
+                                    </Label>
+                                </VBox>
+                                <StackPane>
+                                    <Circle fill="#e8f5e9" radius="20.0" />
+                                    <Text fill="#4caf50" text="🎖">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Text>
+                                </StackPane>
+                            </HBox>
+                            <VBox spacing="5.0">
+                                <ProgressBar maxWidth="Infinity" progress="0.85" styleClass="category-progress-bar" />
+                                <Label styleClass="card-subtitle" text="Top 15% de usuarios" />
+                            </VBox>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                        <VBox spacing="15.0" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <Label styleClass="section-title" text="Actividad Reciente">
+                                <font>
+                                    <Font name="System Bold" size="18.0" />
+                                </font>
+                            </Label>
+                            <StackPane styleClass="chart-placeholder" VBox.vgrow="ALWAYS">
+                                <Label text="Gráfico de Actividad (Simulado)" textFill="#bdbdbd" />
+                            </StackPane>
+                        </VBox>
+
+                        <VBox prefWidth="350.0" spacing="15.0" styleClass="dashboard-card">
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                            <Label styleClass="section-title" text="Consejos Ecológicos">
+                                <font>
+                                    <Font name="System Bold" size="18.0" />
+                                </font>
+                            </Label>
+                            <VBox spacing="10.0">
+                                <VBox styleClass="tip-box, tip-green">
+                                    <padding>
+                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                    </padding>
+                                    <Label styleClass="tip-title" text="Reduce el consumo de carne">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Label styleClass="tip-description" text="Intentar un &quot;Lunes sin carne&quot; puede reducir tu huella significativamente." wrapText="true" />
+                                </VBox>
+                                <VBox styleClass="tip-box, tip-blue">
+                                    <padding>
+                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                    </padding>
+                                    <Label styleClass="tip-title" text="Transporte público">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Label styleClass="tip-description" text="Usar el metro o autobús en lugar del coche ahorra hasta un 30% de emisiones." wrapText="true" />
+                                </VBox>
+                            </VBox>
+                        </VBox>
+                    </HBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

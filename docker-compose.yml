@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: footprintTracker_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin  # Contraseña de superusuario
+      MYSQL_DATABASE: footprintTracker_db     # Nombre de la DB a crear automáticamente
+      MYSQL_USER: admin             # Usuario específico para tu Java
+      MYSQL_PASSWORD: admin     # Contraseña para el usuario Java
+    ports:
+      - "3306:3306"                     # Puerto Host:Contenedor
+    volumes:
+      - mysql_data:/var/lib/mysql       # Persistencia de datos
+
+volumes:
+  mysql_data:

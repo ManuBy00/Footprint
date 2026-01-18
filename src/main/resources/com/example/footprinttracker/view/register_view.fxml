@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane id="rootPane" prefHeight="600.0" prefWidth="800.0"
+           stylesheets="@styles.css"
+           xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.footprinttracker.Controller.RegisterController">
+
+    <VBox alignment="CENTER" spacing="15.0"
+          maxWidth="400.0" maxHeight="580.0"
+          styleClass="login-card">
+
+        <padding>
+            <Insets bottom="30.0" left="40.0" right="40.0" top="30.0"/>
+        </padding>
+
+        <Label styleClass="title-label" text="Crear Cuenta">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+
+        <Label text="Únete y empieza a reducir tu huella." textFill="#757575" />
+
+        <VBox maxWidth="300.0" spacing="10.0">
+            <Label text="Nombre completo" />
+            <TextField fx:id="txtNombre" promptText="Tu nombre" />
+
+            <Label text="Email" />
+            <TextField fx:id="txtEmail" promptText="ejemplo@email.com" />
+
+            <Label text="Contraseña" />
+            <PasswordField fx:id="txtPassword" promptText="******" />
+
+            <Label text="Confirmar Contraseña" />
+            <PasswordField fx:id="txtConfirmPassword" promptText="******" />
+        </VBox>
+
+        <Label fx:id="lblError" textFill="RED" visible="false" wrapText="true"/>
+
+        <Button fx:id="btnRegister" defaultButton="true" mnemonicParsing="false"
+                onAction="#handleRegister" prefWidth="200.0"
+                styleClass="primary-button" text="Registrarse" />
+
+        <HBox alignment="CENTER" spacing="5.0">
+            <Label text="¿Ya tienes cuenta?" textFill="#757575"/>
+            <Hyperlink text="Inicia sesión"
+                       onAction="#volverLogin"
+                       styleClass="link-button"/>
+        </HBox>
+
+    </VBox>
+</StackPane>
