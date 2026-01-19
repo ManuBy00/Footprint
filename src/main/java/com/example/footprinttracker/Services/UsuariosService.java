@@ -3,6 +3,7 @@ package com.example.footprinttracker.Services;
 import com.example.footprinttracker.DAO.UsuarioDAO;
 import com.example.footprinttracker.Model.Habito;
 import com.example.footprinttracker.Model.Usuario;
+import com.example.footprinttracker.Utils.Seguridad;
 import com.example.footprinttracker.Utils.Sesion;
 import com.example.footprinttracker.Utils.Utilidades;
 import org.mindrot.jbcrypt.BCrypt;
@@ -80,5 +81,32 @@ public class UsuariosService {
             usuarioDAO.updateUsuario(usuario);
             return true;
         }
+    }
+
+    public boolean cambiarPassword(String passActual,  String passNuevo) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = Sesion.getInstance().getUsuarioIniciado();
+        if (usuario.checkPassword(passActual)) {
+            String passHashed = BCrypt.hashpw(passNuevo, BCrypt.gensalt());
+            usuario.setPassword(passHashed);
+            usuarioDAO.updateUsuario(usuario);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean eliminarUsuario() {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = Sesion.getInstance().getUsuarioIniciado();
+        if(usuarioDAO.deleteUsuario(usuario.getId())){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public void logOut() {
+        Sesion.getInstance().logOut();
     }
 }

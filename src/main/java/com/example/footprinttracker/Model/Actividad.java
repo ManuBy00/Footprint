@@ -66,4 +66,8 @@ public class Actividad {
         this.huellas = huellas;
     }
 
+    @Override
+    public String toString() {
+        return nombreActividad;
+    }
 }

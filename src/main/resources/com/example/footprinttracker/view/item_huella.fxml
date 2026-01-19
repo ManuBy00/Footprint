@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="Infinity" minHeight="-Infinity"
+      prefHeight="60.0" spacing="10.0" styleClass="table-row" stylesheets="@styles.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.footprinttracker.Controller.HuellaItemController">
+
+    <Label fx:id="lblFecha" maxWidth="Infinity" styleClass="table-cell" text="2024-01-20" HBox.hgrow="ALWAYS" />
+
+    <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0" HBox.hgrow="ALWAYS">
+        <Text fx:id="iconCategoria" styleClass="category-icon-transport" text="🚗" />
+        <Label fx:id="lblCategoria" styleClass="table-cell" text="Transporte" />
+    </HBox>
+
+    <Label fx:id="lblActividad" maxWidth="Infinity" styleClass="table-cell" text="Vuelo a Londres" HBox.hgrow="ALWAYS" />
+
+    <Label fx:id="lblImpacto" alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-cell-impact" text="120 kg CO2" HBox.hgrow="ALWAYS" />
+
+    <Button onAction="#eliminarHuella" styleClass="delete-button">
+        <graphic>
+            <Text styleClass="delete-icon" text="🗑" />
+        </graphic>
+    </Button>
+
+</HBox>

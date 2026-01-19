@@ -22,6 +22,6 @@ public class Test {
 
 
 
-        dao.deleteUsuario(4);
+        dao.deleteUsuario(7);
     }
 }

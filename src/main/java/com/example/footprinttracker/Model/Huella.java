@@ -1,5 +1,6 @@
 package com.example.footprinttracker.Model;
 
+import com.example.footprinttracker.Utils.Sesion;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -27,6 +28,16 @@ public class Huella {
 
     @Column(name = "fecha")
     private Instant fecha;
+
+    public Huella(Categoria categoria, Actividad idActividad, Integer valor, String unidad) {
+        this.idUsuario = Sesion.getInstance().getUsuarioIniciado();
+        this.idActividad = idActividad;
+        this.valor = valor;
+        this.unidad = unidad;
+        this.fecha = Instant.now();
+    }
+
+    public Huella() {}
 
     public Integer getId() {
         return id;

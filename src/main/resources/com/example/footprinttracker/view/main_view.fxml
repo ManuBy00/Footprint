@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="720.0" prefWidth="1080.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.footprinttracker.Controller.DashboardController">
+<BorderPane fx:id="mainContainer" prefHeight="720.0" prefWidth="1080.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.footprinttracker.Controller.DashboardController">
 
     <left>
         <VBox prefWidth="250.0" spacing="20.0" styleClass="sidebar">
@@ -22,12 +22,12 @@
                 <Label styleClass="sidebar-subtitle" text="TRACKER" />
             </VBox>
             <VBox spacing="10.0" VBox.vgrow="ALWAYS">
-                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button, menu-button-active" text="Inicio">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" onAction="#mostrarInicio" styleClass="menu-button, menu-button-active" text="Inicio">
                     <graphic>
                         <Text fill="WHITE" styleClass="menu-icon" text="□" />
                     </graphic>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button" text="Registrar Huella">
+                <Button fx:id="huellasButton" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" onAction="#abrirHuellasView" styleClass="menu-button" text="Registrar Huella">
                     <graphic>
                         <Text fill="WHITE" styleClass="menu-icon" text="+" />
                     </graphic>

@@ -30,7 +30,7 @@ public class RegisterController {
     @FXML private PasswordField txtConfirmPassword;
     @FXML private Label lblError;
 
-    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+
     private UsuariosService usuariosService = new UsuariosService();
 
     @FXML

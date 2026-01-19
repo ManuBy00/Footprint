@@ -102,6 +102,19 @@ public class Utilidades {
             e.printStackTrace();
         }
     }
+
+    public static boolean mostrarConfirmacion(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null); // Opcional: quita el encabezado para que quede más limpio
+        alert.setContentText(mensaje);
+
+        // Muestra la ventana y espera (bloquea el código hasta que el usuario responda)
+        Optional<ButtonType> result = alert.showAndWait();
+
+        // Devuelve true SOLO si el usuario pulsó OK
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
 }
 
 

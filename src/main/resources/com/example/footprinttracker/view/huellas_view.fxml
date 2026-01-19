@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox spacing="25.0" styleClass="content-area" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.footprinttracker.Controller.RegistrarHuellaController">
+
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+
+    <VBox spacing="5.0">
+        <Label styleClass="screen-title" text="Registrar Huella">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+        <Label styleClass="screen-subtitle" text="Añade tus actividades diarias para calcular tu impacto ambiental." textFill="#757575" />
+    </VBox>
+
+    <HBox spacing="30.0" VBox.vgrow="ALWAYS">
+
+        <VBox maxWidth="450.0" prefHeight="407.0" prefWidth="235.0" spacing="20.0" styleClass="content-card" HBox.hgrow="NEVER">
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+
+            <VBox spacing="5.0">
+                <Label styleClass="card-header-title" text="+ Nuevo Registro">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Label styleClass="card-header-subtitle" text="Completa los datos de tu actividad" />
+            </VBox>
+
+            <VBox spacing="15.0">
+                <VBox spacing="8.0">
+                    <Label styleClass="form-label" text="Categoría" />
+                    <ComboBox fx:id="comboCategoria" maxWidth="Infinity" promptText="Selecciona" styleClass="form-input" />
+                </VBox>
+
+                <VBox spacing="8.0">
+                    <Label styleClass="form-label" text="Actividad" />
+                    <ComboBox fx:id="comboActividad" maxWidth="Infinity" promptText="Ej: Vuelo Madrid-BCN" styleClass="form-input" />
+                </VBox>
+
+                <VBox spacing="8.0">
+                    <Label styleClass="form-label" text="Cantidad (unidades/km/litros)" />
+                    <TextField fx:id="txtCantidad" maxWidth="Infinity" promptText="0" styleClass="form-input" />
+                </VBox>
+
+                <Region prefHeight="10.0" />
+
+                <Button fx:id="btnRegistrar" maxWidth="Infinity" onAction="#registrarHuella" styleClass="primary-button-large" text="Registrar Impacto" />
+            </VBox>
+        </VBox>
+
+        <VBox prefHeight="407.0" prefWidth="414.0" spacing="20.0" styleClass="content-card" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+
+            <VBox spacing="5.0">
+                <Label styleClass="card-header-title" text="Historial de Registros">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label styleClass="card-header-subtitle" text="Tus últimas actividades registradas" />
+            </VBox>
+
+            <HBox styleClass="table-header">
+                <Label maxWidth="Infinity" styleClass="table-header-label" text="Fecha" HBox.hgrow="ALWAYS" />
+                <Label maxWidth="Infinity" prefHeight="15.0" prefWidth="84.0" styleClass="table-header-label" text="Categoría" HBox.hgrow="ALWAYS" />
+                <Label maxWidth="Infinity" styleClass="table-header-label" text="Actividad" HBox.hgrow="ALWAYS" />
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-header-label" text="Impacto" HBox.hgrow="ALWAYS" />
+                <Label prefWidth="30.0" /> </HBox>
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="table-scroll-pane" VBox.vgrow="ALWAYS">
+                <content>
+                    <VBox fx:id="listaHistorial" spacing="0.0">
+                        <HBox alignment="CENTER_LEFT" styleClass="table-row">
+                            <Label maxWidth="Infinity" styleClass="table-cell" text="2024-01-15" HBox.hgrow="ALWAYS" />
+                            <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="8.0" HBox.hgrow="ALWAYS">
+                                <Text styleClass="category-icon-transport" text="🚗" />
+                                <Label styleClass="table-cell" text="Transporte" />
+                            </HBox>
+                            <Label maxWidth="Infinity" styleClass="table-cell" text="Viaje en auto" HBox.hgrow="ALWAYS" />
+                            <Label alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-cell-impact" text="15 kg CO2" HBox.hgrow="ALWAYS" />
+                            <Button styleClass="delete-button">
+                                <graphic>
+                                    <Text styleClass="delete-icon" text="🗑" />
+                                </graphic>
+                            </Button>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" styleClass="table-row">
+                            <Label maxWidth="Infinity" styleClass="table-cell" text="2024-01-16" HBox.hgrow="ALWAYS" />
+                            <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="8.0" HBox.hgrow="ALWAYS">
+                                <Text styleClass="category-icon-energy" text="⚡" />
+                                <Label styleClass="table-cell" text="Energía" />
+                            </HBox>
+                            <Label maxWidth="Infinity" styleClass="table-cell" text="Consumo eléctrico" HBox.hgrow="ALWAYS" />
+                            <Label alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-cell-impact" text="45 kg CO2" HBox.hgrow="ALWAYS" />
+                            <Button styleClass="delete-button">
+                                <graphic>
+                                    <Text styleClass="delete-icon" text="🗑" />
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </content>
+            </ScrollPane>
+
+        </VBox>
+    </HBox>
+</VBox>

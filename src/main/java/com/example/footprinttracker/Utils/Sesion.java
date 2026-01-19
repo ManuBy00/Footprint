@@ -31,7 +31,6 @@ public class Sesion {
 
     // Metodo para cerrar sesión
     public void logOut() { //cuando se cierra sesión, se escriben los datos en el xml.
-
         this.userLoged = null;
     }
 }

@@ -16,7 +16,7 @@ public class Categoria {
     private String nombre;
 
     @Column(name = "factor_emision", length = 90)
-    private String factorEmision;
+    private Integer factorEmision;
 
     @Column(name = "unidad", length = 15)
     private String unidad;
@@ -45,11 +45,11 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public String getFactorEmision() {
+    public Integer getFactorEmision() {
         return factorEmision;
     }
 
-    public void setFactorEmision(String factorEmision) {
+    public void setFactorEmision(Integer factorEmision) {
         this.factorEmision = factorEmision;
     }
 
@@ -77,4 +77,8 @@ public class Categoria {
         this.recomendacions = recomendacions;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
