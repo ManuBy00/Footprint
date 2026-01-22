@@ -32,6 +32,15 @@
                         <Text fill="WHITE" styleClass="menu-icon" text="+" />
                     </graphic>
                 </Button>
+
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false"
+                        onAction="#abrirHabitos" prefHeight="50.0" prefWidth="200.0"
+                        styleClass="menu-button" text="Hábitos y Tips">
+                    <graphic>
+                        <Text fill="WHITE" style="-fx-font-size: 16;" text="💡" />
+                    </graphic>
+                </Button>
+
                 <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button" text="Historial">
                     <graphic>
                         <Text fill="WHITE" styleClass="menu-icon" text="⏱" />
@@ -75,9 +84,9 @@
                             </padding>
                             <HBox alignment="CENTER_LEFT" spacing="10.0">
                                 <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <Label styleClass="card-title" text="Huella Total" />
+                                    <Label styleClass="card-title" text="Huella mensual" />
                                     <HBox alignment="BASELINE_LEFT" spacing="5.0">
-                                        <Label styleClass="card-value" text="120">
+                                        <Label fx:id="huellaMensualTxt" styleClass="card-value" text="120">
                                             <font>
                                                 <Font name="System Bold" size="36.0" />
                                             </font>
@@ -104,7 +113,7 @@
                             <HBox alignment="CENTER_LEFT" spacing="10.0">
                                 <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                     <Label styleClass="card-title" text="Registros este mes" />
-                                    <Label styleClass="card-value" text="5">
+                                    <Label fx:id="registroMensual" styleClass="card-value" text="5">
                                         <font>
                                             <Font name="System Bold" size="36.0" />
                                         </font>

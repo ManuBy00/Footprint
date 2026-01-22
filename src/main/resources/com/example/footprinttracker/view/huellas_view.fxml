@@ -90,7 +90,7 @@
                             </HBox>
                             <Label maxWidth="Infinity" styleClass="table-cell" text="Viaje en auto" HBox.hgrow="ALWAYS" />
                             <Label alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-cell-impact" text="15 kg CO2" HBox.hgrow="ALWAYS" />
-                            <Button styleClass="delete-button">
+                            <Button fx:id="deleteHuellaBtn"  styleClass="delete-button">
                                 <graphic>
                                     <Text styleClass="delete-icon" text="🗑" />
                                 </graphic>

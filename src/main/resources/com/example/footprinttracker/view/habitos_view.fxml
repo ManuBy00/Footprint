@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fitToWidth="true" styleClass="content-scroll-pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.footprinttracker.Controller.HabitosController">
+    <content>
+        <VBox spacing="30.0" styleClass="content-area">
+            <padding>
+                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                <VBox HBox.hgrow="ALWAYS">
+                    <Label styleClass="screen-title" text="Hábitos y Recomendaciones">
+                        <font><Font name="System Bold" size="28.0" /></font>
+                    </Label>
+                    <Label styleClass="screen-subtitle" text="Pequeñas acciones, grandes cambios." textFill="#757575" />
+                </VBox>
+
+                <HBox alignment="CENTER" spacing="15.0" styleClass="progress-card">
+                    <VBox alignment="CENTER_LEFT" spacing="5.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Text fill="#2e7d32" style="-fx-font-family: 'Segoe UI Emoji';" text="🏆">
+                                <font><Font size="20.0" /></font>
+                            </Text>
+                            <VBox>
+                                <Label text="Progreso Diario" textFill="#616161">
+                                    <font><Font size="11.0" /></font>
+                                </Label>
+                                <Label fx:id="lblProgresoTexto" text="0/0" textFill="#2e7d32">
+                                    <font><Font name="System Bold" size="18.0" /></font>
+                                </Label>
+                            </VBox>
+                        </HBox>
+                        <ProgressBar fx:id="barraProgreso" prefWidth="120.0" progress="0.0" styleClass="custom-progress-bar" />
+                    </VBox>
+                </HBox>
+            </HBox>
+
+            <HBox spacing="40.0" VBox.vgrow="ALWAYS">
+
+                <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+
+                    <HBox alignment="CENTER_LEFT" spacing="15.0">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Text fill="#2e7d32" style="-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 16;" text="✅" />
+                            <Label styleClass="section-title" text="Tus Hábitos Diarios" />
+                        </HBox>
+
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <Button onAction="#abrirNuevoHabito" styleClass="small-add-button" text="+ Añadir Hábito" />
+                    </HBox>
+
+                    <VBox fx:id="containerHabitos" spacing="15.0">
+                    </VBox>
+
+                </VBox>
+
+                <VBox prefWidth="380.0" spacing="20.0" HBox.hgrow="NEVER">
+
+                    <HBox alignment="CENTER_LEFT" spacing="8.0">
+                        <Text fill="#fbc02d" style="-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 16;" text="💡" />
+                        <Label styleClass="section-title" text="Recomendaciones para ti" />
+                    </HBox>
+
+                    <HBox spacing="15.0" styleClass="recommendation-card">
+                        <VBox alignment="TOP_CENTER" styleClass="icon-box-yellow">
+                            <Text style="-fx-font-size: 20; -fx-font-family: 'Segoe UI Emoji';" text="⚡" />
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label styleClass="rec-title" text="Pásate a LED" />
+                            <Label styleClass="rec-text" text="Cambiar solo 5 bombillas a LED puede ahorrarte 75€ al año." wrapText="true" />
+                            <Label styleClass="rec-link" text="Saber más →" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="15.0" styleClass="recommendation-card">
+                        <VBox alignment="TOP_CENTER" styleClass="icon-box-green">
+                            <Text style="-fx-font-size: 20; -fx-font-family: 'Segoe UI Emoji';" text="🥗" />
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label styleClass="rec-title" text="Dieta basada en plantas" />
+                            <Label styleClass="rec-text" text="Reducir el consumo de carne un día a la semana baja tu huella un 15%." wrapText="true" />
+                            <Label styleClass="rec-link" text="Saber más →" />
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="10.0" styleClass="green-banner">
+                        <Label styleClass="banner-title" text="¿Sabías que...?" textFill="WHITE" />
+                        <Label text="Si todos adoptáramos estos hábitos, reduciríamos la huella de carbono global drásticamente." textFill="#e8f5e9" wrapText="true" />
+                        <Region prefHeight="10.0" />
+                        <Button styleClass="banner-button" text="Ver mi reporte mensual" />
+                    </VBox>
+
+                </VBox>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

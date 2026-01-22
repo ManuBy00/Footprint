@@ -87,7 +87,9 @@ public class RegistrarHuellaController {
 
                 //  Obtener el controlador de esa PEQUEÑA fila y pasarle los datos
                 HuellaItemController itemController = loader.getController();
-                itemController.setDatos(huella);
+                itemController.setDatos(huella, (huella1 -> {
+                    eliminarHuella(huella1);
+                }));
 
                 //  Añadir la fila visual a la lista del dashboard
                 listaHistorial.getChildren().add(fila);
@@ -122,4 +124,23 @@ public class RegistrarHuellaController {
             public Actividad fromString(String s) { return null; }
         });
     }
+
+    private void eliminarHuella(Huella huella) {
+        // Preguntar confirmación
+        boolean confirmar = Utilidades.mostrarConfirmacion("Eliminar", "¿Seguro que quieres borrar este registro?");
+
+        if (confirmar) {
+            // 2. Borrar de la Base de Datos
+            if (huellaService.deleteHuella(huella)) {
+
+                // Refrescar la lista visualmente
+                mostrarHuellasUsuario();
+
+                Utilidades.mostrarAlerta("Eliminado", "Huella eliminada correctamente.");
+            } else {
+                Utilidades.mostrarAlerta("Error", "No se pudo eliminar la huella.");
+            }
+        }
+    }
+
 }

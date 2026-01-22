@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
+import java.util.function.Consumer;
+
 public class HuellaItemController {
     @FXML private Label lblFecha;
     @FXML private Text iconCategoria;
@@ -15,14 +17,18 @@ public class HuellaItemController {
 
     private Huella huella; // Guardamos la referencia para saber cuál borrar
 
+    private Consumer<Huella> onEliminarAction;
+
     // Este método lo llamaremos desde el controlador principal para "rellenar" la fila
-    public void setDatos(Huella huella) {
+    public void setDatos(Huella huella, Consumer<Huella> accionEliminar) {
         this.huella = huella;
 
         lblFecha.setText(huella.getFecha().toString());
         lblCategoria.setText(huella.getIdActividad().getIdCategoria().getNombre());
         lblActividad.setText(huella.getIdActividad().getNombreActividad());
         lblImpacto.setText(huella.getValor().toString() + " " + huella.getUnidad());
+
+        this.onEliminarAction = accionEliminar;
 
         // Configurar icono según categoría
         configurarIcono(huella.getIdActividad().getIdCategoria().getNombre());
@@ -41,7 +47,9 @@ public class HuellaItemController {
     @FXML
     public void eliminarHuella(ActionEvent event) {
         System.out.println("Eliminar huella ID: " + huella.getId());
-        // Aquí podrías llamar a un listener o callback para avisar al padre que borre
+        if (onEliminarAction != null) {
+            onEliminarAction.accept(huella);
+        }
     }
 
 }
