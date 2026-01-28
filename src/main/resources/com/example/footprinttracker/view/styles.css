@@ -483,4 +483,18 @@
     -fx-background-color: #f1f8e9;
 }
 
+.delete-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #9e9e9e; /* Gris suave */
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-padding: 5;
+}
+
+.delete-button:hover {
+    -fx-background-color: #ffebee; /* Fondo rojo muy claro */
+    -fx-text-fill: #d32f2f; /* Rojo fuerte */
+    -fx-background-radius: 50; /* Redondo */
+}
+
 

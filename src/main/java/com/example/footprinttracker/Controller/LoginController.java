@@ -29,6 +29,13 @@ public class LoginController {
     @FXML
     public Hyperlink linkRegistro;
 
+
+    /**
+     * Gestiona el proceso de inicio de sesión cuando el usuario pulsa el botón.
+     * Primero valida que el email tenga un formato correcto y que no haya campos vacíos.
+     * Luego consulta al servicio si las credenciales son válidas. Si es correcto,
+     * cambia a la pantalla principal; si no, muestra un error.
+     */
     public void handleLogin(ActionEvent actionEvent) {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
@@ -55,6 +62,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Acción del botón de navegación
+     * @param actionEvent
+     */
     public void abrirRegistro(ActionEvent actionEvent) {
             Utilidades.cambiarPantalla(btnLogin, "/com/example/footprinttracker/view/register_view.fxml", "Registro");
 

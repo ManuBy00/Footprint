@@ -12,7 +12,9 @@ module com.example.footprinttracker {
     requires jakarta.transaction;
     requires javafx.graphics;
     requires jbcrypt;
+    //requires com.example.footprinttracker;
     //requires com.example.footprinttracker;    // <--- Necesario para conectar con la Base de Datos
+    opens com.example.footprinttracker.DTO to org.hibernate.orm.core;
 
     // --- PERMISOS DE REFLEXIÓN ---
 

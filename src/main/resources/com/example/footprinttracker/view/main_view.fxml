@@ -41,7 +41,7 @@
                     </graphic>
                 </Button>
 
-                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" styleClass="menu-button" text="Historial">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" onAction="#abrirAnalisis" styleClass="menu-button" text="Análisis">
                     <graphic>
                         <Text fill="WHITE" styleClass="menu-icon" text="⏱" />
                     </graphic>

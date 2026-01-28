@@ -77,7 +77,8 @@
                 <Label maxWidth="Infinity" prefHeight="15.0" prefWidth="84.0" styleClass="table-header-label" text="Categoría" HBox.hgrow="ALWAYS" />
                 <Label maxWidth="Infinity" styleClass="table-header-label" text="Actividad" HBox.hgrow="ALWAYS" />
                 <Label alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-header-label" text="Impacto" HBox.hgrow="ALWAYS" />
-                <Label prefWidth="30.0" /> </HBox>
+                <Label prefWidth="30.0" />
+            </HBox>
 
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="table-scroll-pane" VBox.vgrow="ALWAYS">
                 <content>
@@ -96,24 +97,20 @@
                                 </graphic>
                             </Button>
                         </HBox>
-
-                        <HBox alignment="CENTER_LEFT" styleClass="table-row">
-                            <Label maxWidth="Infinity" styleClass="table-cell" text="2024-01-16" HBox.hgrow="ALWAYS" />
-                            <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="8.0" HBox.hgrow="ALWAYS">
-                                <Text styleClass="category-icon-energy" text="⚡" />
-                                <Label styleClass="table-cell" text="Energía" />
-                            </HBox>
-                            <Label maxWidth="Infinity" styleClass="table-cell" text="Consumo eléctrico" HBox.hgrow="ALWAYS" />
-                            <Label alignment="CENTER_RIGHT" maxWidth="Infinity" styleClass="table-cell-impact" text="45 kg CO2" HBox.hgrow="ALWAYS" />
-                            <Button styleClass="delete-button">
-                                <graphic>
-                                    <Text styleClass="delete-icon" text="🗑" />
-                                </graphic>
-                            </Button>
-                        </HBox>
                     </VBox>
                 </content>
             </ScrollPane>
+
+            <HBox alignment="CENTER_RIGHT">
+                <Button fx:id="btnExportar"
+                        onAction="#onDescargarReporteClick"
+                        text="📥 Exportar Historial (CSV)"
+                        style="-fx-background-color: transparent; -fx-text-fill: #666666; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="Guardar historial en archivo Excel/CSV" />
+                    </tooltip>
+                </Button>
+            </HBox>
 
         </VBox>
     </HBox>

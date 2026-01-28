@@ -19,7 +19,11 @@ public class HuellaItemController {
 
     private Consumer<Huella> onEliminarAction;
 
-    // Este método lo llamaremos desde el controlador principal para "rellenar" la fila
+    /**
+     * Rellena la fila visual con la información de la huella (fecha, categoría, impacto...).
+     * Recibe también la lógica (Consumer) que se debe ejecutar si el usuario decide
+     * borrar este registro, guardándola para usarla después.
+     */
     public void setDatos(Huella huella, Consumer<Huella> accionEliminar) {
         this.huella = huella;
 
@@ -34,6 +38,10 @@ public class HuellaItemController {
         configurarIcono(huella.getIdActividad().getIdCategoria().getNombre());
     }
 
+    /**
+     * Cambia el icono o emoji de la fila basándose en el nombre de la categoría
+     * (ej: un coche para Transporte, un rayo para Energía) para identificarlo rápido visualmente.
+     */
     private void configurarIcono(String categoria) {
         // Tu lógica de iconos (puedes copiarla del código anterior)
         switch (categoria.toLowerCase()) {
@@ -44,6 +52,11 @@ public class HuellaItemController {
         }
     }
 
+    /**
+     * Gestiona el clic en el botón de eliminar.
+     * Ejecuta la acción que nos pasó el controlador principal (el Consumer)
+     * para borrar esta huella concreta de la base de datos y de la lista.
+     */
     @FXML
     public void eliminarHuella(ActionEvent event) {
         System.out.println("Eliminar huella ID: " + huella.getId());

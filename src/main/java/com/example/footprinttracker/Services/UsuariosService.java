@@ -14,6 +14,19 @@ import java.util.HashSet;
 public class UsuariosService {
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+    /**
+     * Registra un nuevo usuario en la base de datos tras realizar múltiples validaciones.
+     *
+     * Si todas las validaciones pasan, se cifra la contraseña con BCrypt, se asigna la fecha
+     * de registro actual y se persiste el usuario.
+     *
+     * @param nombre      El nombre de pila del usuario.
+     * @param email       El correo electrónico (identificador único).
+     * @param pass        La contraseña en texto plano.
+     * @param confirmPass La repetición de la contraseña para confirmación.
+     * @return true si el registro fue exitoso;  false si hubo errores de validación
+
+     */
     public boolean registrarUsuario(String nombre, String email, String pass, String confirmPass) {
 
         // 1. Validaciones
@@ -55,6 +68,15 @@ public class UsuariosService {
         return usuarioDAO.addUsuario(nuevoUsuario);
     }
 
+    /**
+     * Autentica a un usuario en el sistema.
+     * Verifica si el correo existe y si la contraseña proporcionada coincide con el hash almacenado en la base de datos (usando checkPassword).
+     * Si las credenciales son correctas, inicializa la sesión global  Sesion.
+     *
+     * @param email    El correo electrónico del usuario.
+     * @param password La contraseña en texto plano para verificar.
+     * @return true si el login es correcto y se inicia sesión;  false si las credenciales son inválidas.
+     */
     public boolean login(String email, String password) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuarioLoged = usuarioDAO.getUsuarioByEmail(email);
@@ -71,6 +93,9 @@ public class UsuariosService {
         }
     }
 
+    /**
+     * Actualiza el nombre del usuario que tiene la sesión iniciada.
+     */
     public boolean cambiarNombre(String newNombre) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = Sesion.getInstance().getUsuarioIniciado();
@@ -83,6 +108,12 @@ public class UsuariosService {
         }
     }
 
+    /**
+     * Modifica la contraseña del usuario actual tras verificar su identidad.
+     * Por seguridad, requiere que el usuario introduzca su contraseña actual antes de
+     * permitir el cambio. La nueva contraseña se cifra inmediatamente con BCrypt antes
+     * de guardarse.
+     */
     public boolean cambiarPassword(String passActual,  String passNuevo) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = Sesion.getInstance().getUsuarioIniciado();
@@ -96,6 +127,11 @@ public class UsuariosService {
         }
     }
 
+    /**
+     * Elimina permanentemente la cuenta del usuario que tiene la sesión iniciada.
+     * Obtiene el ID del usuario de la sesión actual y solicita al DAO su borrado.
+     * @return true si la cuenta fue eliminada correctamente de la base de datos.
+     */
     public boolean eliminarUsuario() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = Sesion.getInstance().getUsuarioIniciado();

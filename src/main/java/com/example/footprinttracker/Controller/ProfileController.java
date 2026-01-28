@@ -25,6 +25,10 @@ public class ProfileController {
         txtNombre.setText(Sesion.getInstance().getUsuarioIniciado().getNombre());
     }
 
+    /**
+     * Actualiza el nombre del usuario. Verifica que el campo no esté vacío y llama al servicio.
+     * Si el nombre es muy corto (menos de 4 letras) o hay error, muestra una alerta.
+     */
     public void actualizarPerfil(ActionEvent actionEvent) {
         String nombreNuevo = txtNombre.getText();
         if (nombreNuevo.isEmpty()) {
@@ -39,6 +43,11 @@ public class ProfileController {
 
     }
 
+    /**
+     * Recoge la nueva contraseña y la cambia llamando al servicio
+     * Comprueba que los campos no estén vacíos, que la nueva contraseña coincida con
+     * la confirmación y que la contraseña actual sea correcta antes de guardar los cambios.
+     */
     public void cambiarPassword(ActionEvent actionEvent) {
         String passActual = txtPassActual.getText();
         String passConfirm = txtPassConfirm.getText();
@@ -60,6 +69,11 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Elimina la cuenta del usuario permanentemente.
+     * Pide confirmación al usuario antes de borrar; si acepta, borra los datos,
+     * cierra la sesión y redirige a la pantalla de login.
+     */
     public void eliminarCuenta(ActionEvent actionEvent) {
         if (Utilidades.mostrarConfirmacion("Confirmar", "Seguro que quiere eliminar la cuenta?")){
             usuariosService.eliminarUsuario();

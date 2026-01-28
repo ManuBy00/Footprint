@@ -33,6 +33,12 @@ public class RegisterController {
 
     private UsuariosService usuariosService = new UsuariosService();
 
+    /**
+     * Gestiona la acción del botón de registro.
+     * * Recoge los datos introducidos en los campos de texto (nombre, email, contraseña)
+     * y delega la validación y creación al servicio. Si el registro tiene éxito,
+     * redirige al usuario a la pantalla de inicio de sesión; si falla, muestra un error.
+     */
     @FXML
     public void handleRegister() {
         String nombre = txtNombre.getText();

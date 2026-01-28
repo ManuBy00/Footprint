@@ -4,20 +4,27 @@ import com.example.footprinttracker.Model.Actividad;
 import com.example.footprinttracker.Model.Categoria;
 import com.example.footprinttracker.Model.Huella;
 import com.example.footprinttracker.Services.HuellaService;
+import com.example.footprinttracker.Services.ReporteService;
 import com.example.footprinttracker.Utils.Utilidades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.footprinttracker.Utils.Utilidades.mostrarAlerta;
+
 public class RegistrarHuellaController {
+
 
 
     HuellaService huellaService = new HuellaService();
@@ -29,6 +36,7 @@ public class RegistrarHuellaController {
     public VBox listaHistorial;
     @FXML
     public TextField txtCantidad;
+    @FXML public Button btnExportar;
 
     public void initialize(){
         mostrarHuellasUsuario();
@@ -51,15 +59,22 @@ public class RegistrarHuellaController {
 
     }
 
+    /**
+     * Gestiona el evento de registro de una nueva huella.
+     * Valida que los campos no estén vacíos y que la cantidad sea numérica y positiva.
+     * Si los datos son correctos, invoca al servicio para guardar el registro y actualiza la lista visual.
+     *
+     * @param actionEvent Evento del botón
+     */
     public void registrarHuella(ActionEvent actionEvent) {
         try {
             if(comboActividad.isDisable() || comboCategoria.isDisable() || txtCantidad.getText().isEmpty()){
-                Utilidades.mostrarAlerta("Error", "No pueden haber campos vacíos");
+                mostrarAlerta("Error", "No pueden haber campos vacíos");
                 return;
             }
 
             if (Integer.parseInt(txtCantidad.getText()) <= 0) {
-                Utilidades.mostrarAlerta("Error", "Cantidad invalida");
+                mostrarAlerta("Error", "Cantidad invalida");
             }
 
             Actividad actividad = (Actividad) comboActividad.getSelectionModel().getSelectedItem();
@@ -69,10 +84,15 @@ public class RegistrarHuellaController {
             huellaService.addHuella(categoria, actividad, cantidad, categoria.getUnidad());
             mostrarHuellasUsuario();
         }catch (NumberFormatException e){
-            Utilidades.mostrarAlerta("Error", "Por favor, introduce un número válido (ej: 10.5).");
+            mostrarAlerta("Error", "Por favor, introduce un número válido (ej: 10.5).");
         }
     }
 
+    /**
+     * Refresca la lista visual del historial de registros.
+     * Limpia el contenedor actual y carga dinámicamente un componente FXML  item_huella.fxml
+     * por cada registro recuperado de la base de datos, asignándole su controlador y lógica de eliminación.
+     */
     private void mostrarHuellasUsuario() {
         listaHistorial.getChildren().clear();
        List<Huella> misHuellas = huellaService.cargarHuellasUsuario();
@@ -99,11 +119,16 @@ public class RegistrarHuellaController {
         }
     }
 
+    /**
+     * Inicializa y configura los selectores (ComboBox) de la interfaz.
+     * Carga las categorías desde la base de datos y define los code StringConverter para
+     * mostrar los nombres legibles de las Categorías y Actividades en lugar de sus referencias de objeto.
+     */
     public void configurarComboCategorias() {
         List<Categoria> categorias = huellaService.cargarCategorias();
         comboCategoria.getItems().addAll(categorias);
 
-        // Configurar qué texto se muestra (para que no salga el hash raro)
+        // Configurar qué texto se muestra (para que no salga el hash)
         comboCategoria.setConverter(new javafx.util.StringConverter<Categoria>() {
             @Override
             public String toString(Categoria categoria) {
@@ -125,6 +150,12 @@ public class RegistrarHuellaController {
         });
     }
 
+    /**
+     * Proceso de eliminación de un registro
+     * Solicita confirmación al usuario mediante un diálogo. Si se acepta, elimina el registro
+     * a través del servicio y refresca la lista de la interfaz.
+     * @param huella El objeto huella a eliminar.
+     */
     private void eliminarHuella(Huella huella) {
         // Preguntar confirmación
         boolean confirmar = Utilidades.mostrarConfirmacion("Eliminar", "¿Seguro que quieres borrar este registro?");
@@ -136,9 +167,39 @@ public class RegistrarHuellaController {
                 // Refrescar la lista visualmente
                 mostrarHuellasUsuario();
 
-                Utilidades.mostrarAlerta("Eliminado", "Huella eliminada correctamente.");
+                mostrarAlerta("Eliminado", "Huella eliminada correctamente.");
             } else {
-                Utilidades.mostrarAlerta("Error", "No se pudo eliminar la huella.");
+                mostrarAlerta("Error", "No se pudo eliminar la huella.");
+            }
+        }
+    }
+
+    /**
+     * Gestiona la exportación del historial completo a un archivo CSV.
+     * Abre un diálogo nativo de selección de archivo FileChooser para que el usuario
+     * elija la ubicación y nombre del archivo antes de generar el reporte.
+     */
+    @FXML
+    private void onDescargarReporteClick() {
+
+        // Elegir dónde guardar
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar CSV");
+        fileChooser.setInitialFileName("historial_huella.csv");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
+
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                ReporteService reporteService = new ReporteService();
+                // Llamada al servicio
+                reporteService.generarCSV(file.getAbsolutePath());
+                mostrarAlerta("Éxito", "Archivo guardado correctamente.");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo guardar: " + e.getMessage());
             }
         }
     }

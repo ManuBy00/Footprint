@@ -9,6 +9,9 @@ import java.util.List;
 
 public class CategoriaDAO {
 
+    /**
+     * Recupera todas las cateogorias registradas en la BD
+     */
     public List<Categoria> getAllCategorias() {
         try (Session session = ConnectionDB.getInstance().getSession()) {
             // HQL simple para traer todo
