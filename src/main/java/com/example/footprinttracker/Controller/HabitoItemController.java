@@ -102,10 +102,9 @@ public class HabitoItemController {
         if (frecuencia == null) frecuencia = 1;
         if (tipo == null) tipo = "Diario";
 
-        // Un poco de lógica gramatical simple
         String veces = (frecuencia == 1) ? "vez" : "veces";
 
-        return "📅 Meta: " + frecuencia + " " + veces + " / " + tipo;
+        return "📅 Frecuencia: " + frecuencia + " " + veces + " / " + tipo;
     }
 
     /**

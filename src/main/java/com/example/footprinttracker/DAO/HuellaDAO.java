@@ -209,7 +209,6 @@ public class HuellaDAO {
      * @return Una lista tipada de CategoriaEstadistica, lista para usar en el PieChart.
      */
     public List<CategoriaEstadistica> obtenerDistribucionCategorias(Usuario usuario) {
-        // Fíjate en el "new com.example...."
         String hql = "SELECT new com.example.footprinttracker.DTO.CategoriaEstadistica(c.nombre, COUNT(h)) " +
                 "FROM Huella h " +
                 "JOIN h.idActividad a " +
@@ -301,6 +300,38 @@ public class HuellaDAO {
         String hql = "SELECT COUNT(DISTINCT h.idUsuario) FROM Huella h";
         try (Session session = ConnectionDB.getInstance().getSession()) {
             return session.createQuery(hql, Long.class).uniqueResult();
+        }
+    }
+
+    /**
+     * Calcula la media global de impacto por usuario en un mes específico.
+     * Realiza una consulta de agregación que:
+     * Filtra todas las huellas del mes y año indicados.</li>
+     * Suma el impacto total (Valor * Factor de Emisión).</li>
+     * <Cuenta cuántos usuarios únicos generaron esas huellas.</li>
+     * Divide el total entre el número de usuarios para obtener la media per cápita.</li>
+     *
+     * @param mes El mes a consultar (1-12).
+     * @param year El año a consultar.
+     * @return El impacto medio (kg CO2) por usuario. Devuelve 0.0 si no hay registros.
+     */
+    public double mediaMensualGlobal(int mes, int year){
+        String hql = "SELECT (SUM(h.valor * c.factorEmision) / COUNT(DISTINCT h.idUsuario)) " +
+                "FROM Huella h "+
+                "JOIN h.idActividad a " +
+                "JOIN a.idCategoria c " +
+                "WHERE month(h.fecha) = :mes " +
+                "AND year(h.fecha) = :year";
+        try (Session session = ConnectionDB.getInstance().getSession()) {
+            Query<Double> query = session.createQuery(hql, Double.class);
+            query.setParameter("mes", mes);
+            query.setParameter("year", year);
+
+            Double resultado = query.uniqueResult();
+            return (resultado != null) ? resultado : 0.0;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0.0;
         }
     }
 }

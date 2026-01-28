@@ -109,4 +109,28 @@ public class HuellaService {
         int numRegistros =  dao.obtenerHuellasMensual(mes, year).toArray().length;
         return numRegistros;
     }
+
+    public String calcularRangoUsuario(){
+        int mes = LocalDate.now().getMonthValue();
+        int year = LocalDate.now().getYear();
+
+        double mediaGlobal = dao.mediaMensualGlobal(mes, year);
+        double mediaUsuario = calcularHuellaMensual(mes, year);
+
+        double margen = mediaGlobal * 0.10;
+
+        double limiteInferior = mediaGlobal - margen; // Ej: 100 - 10 = 90
+        double limiteSuperior = mediaGlobal + margen; // Ej: 100 + 10 = 110
+
+        if (mediaUsuario < limiteInferior) {
+            return "Eco-Friendly";
+
+        } else if (mediaUsuario > limiteSuperior) {
+            return "Consumidor";
+
+        } else {
+            // Está en la zona intermedia (entre 90 y 110)
+            return "Sostenible";
+        }
+    }
 }

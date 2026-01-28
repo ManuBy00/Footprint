@@ -43,7 +43,6 @@ public class HuellaItemController {
      * (ej: un coche para Transporte, un rayo para Energía) para identificarlo rápido visualmente.
      */
     private void configurarIcono(String categoria) {
-        // Tu lógica de iconos (puedes copiarla del código anterior)
         switch (categoria.toLowerCase()) {
             case "transporte": iconCategoria.setText("🚗"); break;
             case "energía": iconCategoria.setText("⚡"); break;

@@ -497,4 +497,8 @@
     -fx-background-radius: 50; /* Redondo */
 }
 
+.text-success { -fx-text-fill: #4caf50; }
+.text-warning { -fx-text-fill: #ff9800; }
+.text-danger  { -fx-text-fill: #f44336; }
+
 

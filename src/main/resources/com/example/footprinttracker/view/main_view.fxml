@@ -33,9 +33,7 @@
                     </graphic>
                 </Button>
 
-                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false"
-                        onAction="#abrirHabitos" prefHeight="50.0" prefWidth="200.0"
-                        styleClass="menu-button" text="Hábitos y Tips">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#abrirHabitos" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button" text="Hábitos y Tips">
                     <graphic>
                         <Text fill="WHITE" style="-fx-font-size: 16;" text="💡" />
                     </graphic>
@@ -131,59 +129,55 @@
                             <Label styleClass="card-subtitle" text="Último registro: hace 2 días" />
                         </VBox>
 
-                        <VBox styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="cardRango" styleClass="dashboard-card" HBox.hgrow="ALWAYS" spacing="15.0">
                             <padding>
-                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
                             </padding>
+
                             <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <Label styleClass="card-title" text="Tu Categoría" />
-                                    <Label styleClass="card-value, category-eco" text="Eco-Friendly">
-                                        <font>
-                                            <Font name="System Bold" size="28.0" />
-                                        </font>
-                                    </Label>
+                                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="card-title" text="Tu Rango" />
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                        <Label fx:id="lblEmoji" text="🌿">
+                                            <font><Font size="24.0" /></font>
+                                        </Label>
+                                        <Label fx:id="txtRango" styleClass="card-value" text="Sostenible">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Label>
+                                    </HBox>
                                 </VBox>
+
                                 <StackPane>
-                                    <Circle fill="#e8f5e9" radius="20.0" />
-                                    <Text fill="#4caf50" text="🎖">
+                                    <Circle fx:id="circuloRango" fill="#e8f5e9" radius="25.0" />
+                                    <Text fx:id="iconoRango" fill="#4caf50" text="⚖️">
                                         <font>
-                                            <Font size="20.0" />
+                                            <Font size="22.0" />
                                         </font>
                                     </Text>
                                 </StackPane>
                             </HBox>
-                            <VBox spacing="5.0">
-                                <ProgressBar maxWidth="Infinity" progress="0.85" styleClass="category-progress-bar" />
-                                <Label styleClass="card-subtitle" text="Top 15% de usuarios" />
+
+                            <VBox spacing="8.0">
+                                <ProgressBar fx:id="barraRango" maxWidth="Infinity" progress="0.5" styleClass="category-progress-bar" />
+                                <Label fx:id="rangoSubtitulo" styleClass="card-subtitle" text="Analizando datos..." wrapText="true"/>
                             </VBox>
                         </VBox>
                     </HBox>
 
-                    <HBox spacing="20.0" VBox.vgrow="ALWAYS">
-                        <VBox spacing="15.0" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
-                            <padding>
-                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                            </padding>
-                            <Label styleClass="section-title" text="Actividad Reciente">
-                                <font>
-                                    <Font name="System Bold" size="18.0" />
-                                </font>
-                            </Label>
-                            <StackPane styleClass="chart-placeholder" VBox.vgrow="ALWAYS">
-                                <Label text="Gráfico de Actividad (Simulado)" textFill="#bdbdbd" />
-                            </StackPane>
-                        </VBox>
+                    <HBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
 
-                        <VBox prefWidth="350.0" spacing="15.0" styleClass="dashboard-card">
+                        <VBox spacing="15.0" styleClass="dashboard-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
                             <padding>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                             </padding>
-                            <Label styleClass="section-title" text="Consejos Ecológicos">
+                            <Label styleClass="section-title" text="Curiosidades Ecológicas">
                                 <font>
                                     <Font name="System Bold" size="18.0" />
                                 </font>
                             </Label>
+
                             <VBox spacing="10.0">
                                 <VBox styleClass="tip-box, tip-green">
                                     <padding>
@@ -200,12 +194,23 @@
                                     <padding>
                                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                     </padding>
-                                    <Label styleClass="tip-title" text="Transporte público">
+                                    <Label styleClass="tip-title" text="Aire acondicionado natural">
                                         <font>
                                             <Font name="System Bold" size="14.0" />
                                         </font>
                                     </Label>
-                                    <Label styleClass="tip-description" text="Usar el metro o autobús en lugar del coche ahorra hasta un 30% de emisiones." wrapText="true" />
+                                    <Label styleClass="tip-description" text="Un solo árbol maduro tiene el mismo efecto refrescante que 10 aires acondicionados de habitación funcionando 20 horas al día." wrapText="true" />
+                                </VBox>
+
+                                <VBox styleClass="tip-box, tip-green"> <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                </padding>
+                                    <Label styleClass="tip-title" text="Limpieza Digital">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Label styleClass="tip-description" text="¿Sabías que si cada usuario borra 10 emails, ahorramos toneladas de CO2? Los servidores consumen mucha energía." wrapText="true" />
                                 </VBox>
                             </VBox>
                         </VBox>

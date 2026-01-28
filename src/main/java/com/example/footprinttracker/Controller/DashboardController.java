@@ -14,7 +14,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,16 +36,27 @@ public class DashboardController implements Initializable {
     public Label huellaMensualTxt;
     @FXML
     public Label registroMensual;
+    @FXML public VBox cardRango;
+    @FXML public Label txtRango;
+    @FXML public Label rangoSubtitulo;
+    public ProgressBar barraRango;
+    public Text iconoRango;
+    public Circle circuloRango;
 
     // Variable para guardar la vista de "Inicio" (las gráficas) y no tener que recargarlas
     private Node vistaInicio;
     Usuario usuario = Sesion.getInstance().getUsuarioIniciado();
+    HuellaService huellaService =  new HuellaService();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
         setViewData();
         vistaInicio = mainContainer.getCenter();
+        String rangoTexto = huellaService.calcularRangoUsuario();
+
+        // 2. Actualizamos la UI en función de ese texto
+        actualizarCardRango(rangoTexto);
     }
 
     /**
@@ -149,5 +164,66 @@ public class DashboardController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Parsea el texto recibido del servicio para aplicar los estilos visuales correctos.
+     */
+    private void actualizarCardRango(String rangoServicio) {
+        // Limpiamos estilos de texto previos (si usas clases CSS para colores)
+        txtRango.getStyleClass().removeAll("text-success", "text-warning", "text-danger");
+
+        // Ponemos el texto tal cual viene del servicio (ej: "🟢 Eco-Friendly")
+        txtRango.setText(rangoServicio);
+
+        // --- LÓGICA VISUAL SEGÚN EL TEXTO ---
+
+        if (rangoServicio.contains("Eco-Friendly")) {
+            // VERDE: Mejor que la media
+            configurarEstiloRango(
+                    "¡Excelente trabajo! Tu huella es inferior a la media",   // Subtítulo
+                    "🌿",                    // Icono visual
+                    1.0,                     // Barra llena
+                    "#4caf50",               // Color Verde
+                    "#e8f5e9"                // Fondo Verde claro
+            );
+            txtRango.getStyleClass().add("text-success"); // Opcional si usas CSS
+
+        } else if (rangoServicio.contains("Consumidor")) {
+            // ROJO: Peor que la media
+            configurarEstiloRango(
+                    "Tu impacto es superior a la media.", // Subtítulo
+                    "🏭",                    // Icono visual
+                    0.3,                     // Barra baja
+                    "#f44336",               // Color Rojo
+                    "#ffebee"                // Fondo Rojo claro
+            );
+            txtRango.getStyleClass().add("text-danger");
+
+        } else {
+            // AMARILLO (Sostenible / Default): En la media
+            configurarEstiloRango(
+                    "En la media global",    // Subtítulo
+                    "⚖️",                    // Icono visual
+                    0.6,                     // Barra media
+                    "#ff9800",               // Color Naranja
+                    "#fff3e0"                // Fondo Naranja claro
+            );
+            txtRango.getStyleClass().add("text-warning");
+        }
+    }
+
+    // Método auxiliar para aplicar colores y estilos limpiamente
+    private void configurarEstiloRango(String subtitulo, String icono, double progreso, String colorHex, String fondoHex) {
+        rangoSubtitulo.setText(subtitulo);
+        iconoRango.setText(icono);
+        barraRango.setProgress(progreso);
+
+        // Aplicar colores
+        iconoRango.setFill(javafx.scene.paint.Color.web(colorHex));
+        circuloRango.setFill(javafx.scene.paint.Color.web(fondoHex));
+
+        // Cambiar color de la barra de progreso dinámicamente
+        barraRango.setStyle("-fx-accent: " + colorHex + ";");
     }
 }

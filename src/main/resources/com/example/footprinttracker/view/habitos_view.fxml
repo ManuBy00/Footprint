@@ -17,7 +17,7 @@
                     <Label styleClass="screen-title" text="Hábitos y Recomendaciones">
                         <font><Font name="System Bold" size="28.0" /></font>
                     </Label>
-                    <Label styleClass="screen-subtitle" text="Pequeñas acciones, grandes cambios." textFill="#757575" />
+                    <Label styleClass="screen-subtitle" text="Pequeñas acciones, grandes cambios. ¡Haz check si has aplicado una recomendación en alguno de tus hábitos!" textFill="#757575" />
                 </VBox>
 
                 <HBox alignment="CENTER" spacing="15.0" styleClass="progress-card">

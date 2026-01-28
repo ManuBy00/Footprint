@@ -105,7 +105,7 @@ public class RegistrarHuellaController {
                 // Obtener el nodo raíz (el HBox)
                 HBox fila = loader.load();
 
-                //  Obtener el controlador de esa PEQUEÑA fila y pasarle los datos
+                //  Obtener el controlador de esa fila y pasarle los datos
                 HuellaItemController itemController = loader.getController();
                 itemController.setDatos(huella, (huella1 -> {
                     eliminarHuella(huella1);

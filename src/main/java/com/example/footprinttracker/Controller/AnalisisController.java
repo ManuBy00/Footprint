@@ -35,11 +35,10 @@ public class AnalisisController implements Initializable {
     @FXML public BarChart barChartComparativa;
 
     // --- DEPENDENCIAS ---
-    private final AnalisisService analisisService; // Usamos el Servicio, no el DAO
+    private final AnalisisService analisisService;
     private Usuario usuario;
     private final DecimalFormat df = new DecimalFormat("#.00");
 
-    // Constructor (si usas inyección de dependencias) o inicialización simple
     public AnalisisController() {
         this.analisisService = new AnalisisService();
     }
@@ -76,16 +75,16 @@ public class AnalisisController implements Initializable {
      * que requiere JavaFX y muestra visualmente qué categorías tienen más registros.
      */
     private void cargarGraficoSectores() {
-        // 1. Ahora recibimos una lista de objetos bonitos
+        // recibimos una lista de objetos CategoriraEstadistica, que contiene todos los datos que queremos mostrar
         List<CategoriaEstadistica> datos = analisisService.obtenerDatosDistribucion(usuario);
 
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
 
-        // 2. Usamos getters normales. ¡Mucho más legible!
+
         for (CategoriaEstadistica item : datos) {
             pieData.add(new PieChart.Data(
-                    item.getNombreCategoria(), // Sin (String) fila[0]
-                    item.getCantidad()         // Sin (Long) fila[1]
+                    item.getNombreCategoria(),
+                    item.getCantidad()
             ));
         }
 
@@ -99,16 +98,15 @@ public class AnalisisController implements Initializable {
      * abreviado en español (ej: 1 -> "ene") y dibuja la serie temporal para ver la tendencia del año.
      */
     private void cargarGraficoBarras() {
-        // 1. Recibimos una lista limpia de objetos
+        // Recibimos una lista limpia de objetos
         List<ImpactoMensual> datos = analisisService.obtenerDatosEvolucionMensual(usuario);
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Año Actual");
 
-        // 2. Usamos los getters del DTO. ¡Mucho más seguro y legible!
+        //Usamos los getters del DTO
         for (ImpactoMensual item : datos) {
 
-            // Ya no hay dudas de qué es cada cosa
             int mesNum = item.getMes();
             Double impacto = item.getTotalImpacto();
 
