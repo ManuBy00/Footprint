@@ -155,6 +155,7 @@ public class HabitosController implements Initializable {
 
             cargarDatos();
             renderizarListaHabitos();
+            renderizarListaRedomendaciones();
             calcularProgreso();
         }catch (IOException e) {
             e.printStackTrace();

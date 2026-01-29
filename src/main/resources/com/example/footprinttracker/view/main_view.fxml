@@ -126,7 +126,7 @@
                                     </Text>
                                 </StackPane>
                             </HBox>
-                            <Label styleClass="card-subtitle" text="Último registro: hace 2 días" />
+
                         </VBox>
 
                         <VBox fx:id="cardRango" spacing="15.0" styleClass="dashboard-card" HBox.hgrow="ALWAYS">

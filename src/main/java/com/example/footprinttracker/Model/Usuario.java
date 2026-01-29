@@ -17,35 +17,22 @@ public class Usuario {
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 90)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 30)
+    @Column(name = "password", nullable = false, length = 300)
     private String password;
 
     @Column(name = "fecha_registro")
     private Instant fechaRegistro;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "id_usuario")
-    private Habito habito;
+    private Set<Habito> habitos = new LinkedHashSet<>();
 
     @OneToMany
     @JoinColumn(name = "id_usuario")
     private Set<Huella> huellas = new LinkedHashSet<>();
-
-    public Usuario(String nombre, String email, String password, Instant fechaRegistro, Habito habito, Set<Huella> huellas) {
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.fechaRegistro = fechaRegistro;
-        this.habito = habito;
-        this.huellas = huellas;
-    }
-
-    public Usuario() {
-
-    }
 
     public Integer getId() {
         return id;
@@ -63,7 +50,7 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String  getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -87,12 +74,12 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public Habito getHabito() {
-        return habito;
+    public Set<Habito> getHabitos() {
+        return habitos;
     }
 
-    public void setHabito(Habito habito) {
-        this.habito = habito;
+    public void setHabitos(Set<Habito> habitos) {
+        this.habitos = habitos;
     }
 
     public Set<Huella> getHuellas() {

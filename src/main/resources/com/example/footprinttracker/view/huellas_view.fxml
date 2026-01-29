@@ -54,7 +54,7 @@
 
                 <Region prefHeight="10.0" />
 
-                <Button fx:id="btnRegistrar" maxWidth="Infinity" onAction="#registrarHuella" styleClass="primary-button-large" text="Registrar Impacto" />
+                <Button fx:id="btnRegistrar" maxWidth="Infinity" onAction="#registrarHuella" styleClass="primary-button" text="Registrar Impacto" />
             </VBox>
         </VBox>
 

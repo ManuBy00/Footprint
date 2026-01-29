@@ -221,6 +221,18 @@
 }
 
 .danger-button {
+    -fx-background-color: #ffebee; /* Fondo rojizo muy pálido */
+    -fx-text-fill: #c62828;       /* Texto rojo oscuro */
+    -fx-border-color: #ef9a9a;    /* Borde rojo suave */
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;           /* Espaciado interno cómodo */
+    -fx-cursor: hand;
+    -fx-effect: null;             /* Sin sombras por defecto */
+    -fx-transition: all 0.3s;     /* (JavaFX no soporta transition nativo así, pero se ve bien igual) */
 }
 
 

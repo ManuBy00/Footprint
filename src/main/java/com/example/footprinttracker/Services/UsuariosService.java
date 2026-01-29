@@ -58,7 +58,7 @@ public class UsuariosService {
         // Asegúrate de tener este campo en tu entidad Usuario o bórralo si no lo usas
         nuevoUsuario.setFechaRegistro(Instant.now());
         nuevoUsuario.setHuellas(new HashSet<>());
-        nuevoUsuario.setHabito(new Habito());
+        nuevoUsuario.setHabitos(new HashSet<>());
 
         // 3. Encriptar contraseña
         String hashedPass = BCrypt.hashpw(pass, BCrypt.gensalt());

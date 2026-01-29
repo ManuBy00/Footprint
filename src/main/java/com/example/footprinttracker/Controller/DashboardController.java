@@ -53,10 +53,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources){
         setViewData();
         vistaInicio = mainContainer.getCenter();
-        String rangoTexto = huellaService.calcularRangoUsuario();
 
-        // 2. Actualizamos la UI en función de ese texto
-        actualizarCardRango(rangoTexto);
     }
 
     /**
@@ -136,6 +133,9 @@ public class DashboardController implements Initializable {
 
         huellaMensualTxt.setText(String.format("%.2f", impactoMensual));
         registroMensual.setText(String.format("%.2s", numRegistros));
+        String rangoTexto = huellaService.calcularRangoUsuario();
+        actualizarCardRango(rangoTexto);
+
     }
 
     /**

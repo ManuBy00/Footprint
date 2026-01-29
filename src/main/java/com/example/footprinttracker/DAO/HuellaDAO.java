@@ -103,12 +103,12 @@ public class HuellaDAO {
     public List<Huella> getHuellasByUsuario(Usuario usuario) {
         try (Session session = ConnectionDB.getInstance().getSession()) {
 
-            // 1. "JOIN FETCH h.idActividad a" -> Carga la Actividad y le pone el alias 'a'
-            // 2. "JOIN FETCH a.idCategoria"   -> Usa el alias 'a' para cargar también la Categoría
+            // "JOIN FETCH h.idActividad a" -> Carga la Actividad y le pone el alias 'a'
+            //  "JOIN FETCH a.idCategoria"   -> Usa el alias 'a' para cargar también la Categoría
             String hql = "FROM Huella h " +
                     "JOIN FETCH h.idActividad a " +
                     "JOIN FETCH a.idCategoria " +
-                    "WHERE h.idUsuario.id = :uid " + // O h.idUsuario.id si no lo cambiaste
+                    "WHERE h.idUsuario.id = :uid " +
                     "ORDER BY h.fecha DESC";
 
             Query<Huella> query = session.createQuery(hql, Huella.class);
@@ -232,7 +232,6 @@ public class HuellaDAO {
      * @return Lista de objetos ImpactoMensual con el mes y el total calculado.
      */
     public List<ImpactoMensual> obtenerImpactoMensual(Usuario usuario, int anio) {
-        // RECUERDA: Ajusta "com.example.footprinttracker.DTO" a tu paquete real
         String hql = "SELECT new " + ImpactoMensual.class.getName() + "(" +
                 "   month(h.fecha), " +               // Mes (Integer)
                 "   SUM(h.valor * c.factorEmision) " + // Impacto (Double)

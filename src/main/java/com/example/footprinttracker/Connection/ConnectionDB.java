@@ -12,12 +12,12 @@ import java.sql.Statement;
 
 public class ConnectionDB {
 
-    //1. Atributo estatico de la misma clase (instance)
+    // Atributo estatico de la misma clase (instance)
     private static ConnectionDB instance;
-    //2. Atributo para el sessionFactory
+    // Atributo para el sessionFactory
     private SessionFactory sessionFactory;
 
-    //3. Constructor privado
+    // Constructor privado
     private ConnectionDB() {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -27,7 +27,7 @@ public class ConnectionDB {
         }
     }
 
-    //4. Metodo publico y estático para devolver la instancia de la sesión
+    // Metodo publico y estático para devolver la instancia de la sesión ()
     public static ConnectionDB getInstance() {
         if (instance == null) {
             instance = new ConnectionDB();
@@ -35,10 +35,10 @@ public class ConnectionDB {
         return instance;
     }
 
-    //5. Metodo public para abrir la sesión
+    // Metodo public para abrir la sesión
     public Session getSession() {return sessionFactory.openSession();}
 
-    //6. Metodo que cierra SessionFactory
+    // Metodo que cierra SessionFactory
     public void close(){
         if(sessionFactory!=null&&sessionFactory.isOpen()){
             sessionFactory.close();
